@@ -1,0 +1,14 @@
+- Bottom Navigation
+1. create fragment in activity 1st
+2. create bottom navigation in activity
+3. create navigation graph file
+4. add fragments in there
+5. attach fragment with activity_main by using below in fragment
+        app:navGraph="@navigation/nav_graph"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+6. create a menu for adding buttons in bottom navigationBar
+7. add items in menu for bottom menu and give them id
+   Note: Id should be same as provided in the nav graph
+8. add the menu in the bottom navigation of activity main
+9. add code for nav controller and bottom nav in main activity
+10.
