@@ -11,4 +11,10 @@
    Note: Id should be same as provided in the nav graph
 8. add the menu in the bottom navigation of activity main
 9. add code for nav controller and bottom nav in main activity
-10.
+
+- fragment
+1. study fragment from 2_basic_viewmodel_retrofit branch
+
+
+- coordinate layout for collapsing app bar layout
+
