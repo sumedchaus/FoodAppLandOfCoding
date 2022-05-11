@@ -1,5 +1,7 @@
 package com.cs.foodapplandofcoding.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +19,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var mealName: String
     private lateinit var mealThumb: String
     private lateinit var viewModel: MealViewModel
+    private lateinit var youtubeLink: String
 
     lateinit var binding: ActivityMealBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +35,14 @@ class MealActivity : AppCompatActivity() {
 
         viewModel.getMealDetail(mealId)
         observeMealDetailsLiveData()
+        onYoutubeImageClick()
+    }
+
+    private fun onYoutubeImageClick() {
+        binding.imgYoutube.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
+            startActivity(intent)
+        }
     }
 
     private fun observeMealDetailsLiveData() {
@@ -67,7 +78,7 @@ class MealActivity : AppCompatActivity() {
             binding.tvCategory.text = "Category: ${meal.strCategory} "
                 binding.tvArea.text = "Area: ${meal.strArea} "
                 binding.instructionDetails.text = "Area: ${meal.strInstructions} "
-
+            youtubeLink = meal.strYoutube
         })
     }
 
