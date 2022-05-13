@@ -101,6 +101,8 @@ class MealActivity : AppCompatActivity() {
         mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
     }
 
+
+
     private fun  loadingCase(){
         binding.progressBar.visibility = View.VISIBLE
         binding.btnAddToFav.visibility = View.INVISIBLE

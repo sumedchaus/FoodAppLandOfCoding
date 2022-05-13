@@ -1,5 +1,6 @@
 package com.cs.foodapplandofcoding.networking
 
+import com.cs.foodapplandofcoding.model.CategoryList
 import com.cs.foodapplandofcoding.model.MealList
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,4 +17,11 @@ interface MealApi {
         @Query("i")
         id: String
     ): Call<MealList>
+
+    @GET("api/json/v1/1/filter.php?")
+    fun getPopularItems(
+        @Query("c")
+        categoryName: String
+    ): Call<CategoryList>
+
 }
