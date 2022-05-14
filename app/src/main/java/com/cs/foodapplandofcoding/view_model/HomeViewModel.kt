@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cs.foodapplandofcoding.model.CategoryList
-import com.cs.foodapplandofcoding.model.CategoryMeals
-import com.cs.foodapplandofcoding.model.Meal
-import com.cs.foodapplandofcoding.model.MealList
+import com.cs.foodapplandofcoding.model.*
 import com.cs.foodapplandofcoding.networking.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +13,8 @@ import retrofit2.Response
 class HomeViewModel: ViewModel() {
 
     private  var randomMealLiveData =  MutableLiveData<Meal>()
-    private  var popularItemsLiveData =  MutableLiveData<List<CategoryMeals>>()
+    private  var popularItemsLiveData =  MutableLiveData<List<MealsByCategory>>()
+    private  var categoryItemsLiveData =  MutableLiveData<List<Category>>()
 
 
     fun getRandomMeal(){
@@ -44,16 +42,32 @@ class HomeViewModel: ViewModel() {
     }
 
     fun getPopularItems(){
-        RetrofitInstance.api.getPopularItems("Seafood").enqueue(object :Callback<CategoryList>{
-            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+        RetrofitInstance.api.getPopularItems("Seafood").enqueue(object :Callback<MealsByCategoryList>{
+            override fun onResponse(call: Call<MealsByCategoryList>, response: Response<MealsByCategoryList>) {
                if(response.isSuccessful){
                    popularItemsLiveData.value = response.body()!!.meals
                }
             }
 
+            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
+                Log.d("Error Home Fragment" , t.message.toString())
+            }
+
+        })
+    }
+
+    fun getCategories(){
+        RetrofitInstance.api.getCategory().enqueue(object : Callback<CategoryList>{
+            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+                if(response.isSuccessful){
+                    categoryItemsLiveData.value = response.body()!!.categories
+                }
+            }
+
             override fun onFailure(call: Call<CategoryList>, t: Throwable) {
                 Log.d("Error Home Fragment" , t.message.toString())
             }
+
 
         })
     }
@@ -61,7 +75,11 @@ class HomeViewModel: ViewModel() {
         return randomMealLiveData
     }
 
-    fun observePopularItemsLiveData(): LiveData<List<CategoryMeals>>{
+    fun observePopularItemsLiveData(): LiveData<List<MealsByCategory>>{
         return popularItemsLiveData
+    }
+    fun observeCategoriesLiveData(): LiveData<List<Category>>{
+        return categoryItemsLiveData
+
     }
 }

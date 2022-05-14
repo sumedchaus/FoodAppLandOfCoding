@@ -2,12 +2,11 @@ package com.cs.foodapplandofcoding.screens
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.R
 import com.cs.foodapplandofcoding.databinding.ActivityMealBinding
@@ -21,13 +20,13 @@ class MealActivity : AppCompatActivity() {
     private lateinit var viewModel: MealViewModel
     private lateinit var youtubeLink: String
 
-    lateinit var binding: ActivityMealBinding
+    private lateinit var binding: ActivityMealBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MealViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MealViewModel::class.java]
 
         loadingCase()
         getMealInformationFromIntent()
@@ -73,11 +72,10 @@ class MealActivity : AppCompatActivity() {
 //            })
 
 
-
             onResponseCase()
             binding.tvCategory.text = "Category: ${meal.strCategory} "
-                binding.tvArea.text = "Area: ${meal.strArea} "
-                binding.instructionDetails.text = "Area: ${meal.strInstructions} "
+            binding.tvArea.text = "Area: ${meal.strArea} "
+            binding.instructionDetails.text = "Area: ${meal.strInstructions} "
             youtubeLink = meal.strYoutube
         })
     }
@@ -102,8 +100,7 @@ class MealActivity : AppCompatActivity() {
     }
 
 
-
-    private fun  loadingCase(){
+    private fun loadingCase() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnAddToFav.visibility = View.INVISIBLE
         binding.tvInstruction.visibility = View.INVISIBLE
@@ -112,7 +109,7 @@ class MealActivity : AppCompatActivity() {
         binding.imgYoutube.visibility = View.INVISIBLE
     }
 
-    fun onResponseCase(){
+    private fun onResponseCase() {
         binding.progressBar.visibility = View.INVISIBLE
         binding.btnAddToFav.visibility = View.VISIBLE
         binding.tvInstruction.visibility = View.VISIBLE

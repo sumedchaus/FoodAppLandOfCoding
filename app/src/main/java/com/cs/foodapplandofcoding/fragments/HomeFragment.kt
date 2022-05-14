@@ -2,19 +2,22 @@ package com.cs.foodapplandofcoding.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.adapters.MostPopularMealAdapter
 import com.cs.foodapplandofcoding.databinding.FragmentHomeBinding
-import com.cs.foodapplandofcoding.model.CategoryMeals
+import com.cs.foodapplandofcoding.model.MealsByCategory
 import com.cs.foodapplandofcoding.model.Meal
 import com.cs.foodapplandofcoding.screens.MealActivity
+import com.cs.foodapplandofcoding.view_model.CategoriesAdapter
 import com.cs.foodapplandofcoding.view_model.HomeViewModel
 
 
@@ -26,6 +29,7 @@ class HomeFragment : Fragment() {
     //    val viewModel: HomeViewModel by viewModels()
     private lateinit var randomMeal: Meal
     private lateinit var popularItemAdapter: MostPopularMealAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
 
 
     companion object {
@@ -56,15 +60,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRandomMeal()
-        observerRandomMeals()
 
         preparePopularItemsRecycleView()
+
+        viewModel.getRandomMeal()
+        observerRandomMeals()
         onRandomMealClick()
+
         viewModel.getPopularItems()
         observePopularItemLiveData()
         onPopularItemClick()
 
+        prepareCategoriesRecyclerView()
+        viewModel.getCategories()
+        observerCategoriesLiveData()
+
+    }
+
+    private fun prepareCategoriesRecyclerView() {
+        categoriesAdapter = CategoriesAdapter()
+        binding.recViewCategories.apply {
+            layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
+            adapter = categoriesAdapter
+        }
+    }
+
+    private fun observerCategoriesLiveData() {
+        viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer{ categories ->
+              categoriesAdapter.setCategoryList(categories)
+        })
     }
 
     private fun onPopularItemClick() {
@@ -88,7 +112,7 @@ class HomeFragment : Fragment() {
     private fun observePopularItemLiveData() {
         viewModel.observePopularItemsLiveData().observe(viewLifecycleOwner, Observer { mealList ->
 
-            popularItemAdapter.setList(mealList = mealList as ArrayList<CategoryMeals>)
+            popularItemAdapter.setList(mealList = mealList as ArrayList<MealsByCategory>)
         })
     }
 
@@ -110,7 +134,6 @@ class HomeFragment : Fragment() {
                 .into(binding.imgRandomMeal)
 
             this.randomMeal = meal
-
         })
     }
 }
