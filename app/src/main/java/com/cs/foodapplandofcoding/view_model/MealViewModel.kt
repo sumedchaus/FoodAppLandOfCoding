@@ -13,7 +13,19 @@ import retrofit2.Response
 
 class MealViewModel : ViewModel() {
 
-    private var mealDetailLiveData = MutableLiveData<Meal>()
+//    // The internal MutableLiveData that stores the status of the most recent request
+//    private val _status = MutableLiveData<Meal>()
+//
+//    // The external immutable LiveData for the request status
+//    val status: LiveData<Meal> = _status
+
+
+
+    private var _mealDetailLiveData = MutableLiveData<Meal>()
+    // convert mutable live data into live data
+    val mealDetailLiveData : LiveData<Meal> = _mealDetailLiveData
+
+
     var isLoading = MutableLiveData<Boolean>(false)
 
     fun getMealDetail(id: String) {
@@ -22,7 +34,7 @@ class MealViewModel : ViewModel() {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                 if (response.isSuccessful) {
                     isLoading.value = false
-                    mealDetailLiveData.value = response.body()!!.meals[0]
+                    _mealDetailLiveData.value = response.body()!!.meals[0]
 
                 } else {
                     isLoading.value = false
@@ -38,9 +50,10 @@ class MealViewModel : ViewModel() {
         })
     }
 
-    fun observeMealDetailLiveData(): LiveData<Meal>{
-        return mealDetailLiveData
+    // mutable live data converted into live data
 
-    }
+//    fun observeMealDetailLiveData(): LiveData<Meal>{
+//        return _mealDetailLiveData
+//    }
 
 }

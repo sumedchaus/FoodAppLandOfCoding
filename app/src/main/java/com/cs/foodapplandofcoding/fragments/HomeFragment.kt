@@ -16,6 +16,7 @@ import com.cs.foodapplandofcoding.adapters.MostPopularMealAdapter
 import com.cs.foodapplandofcoding.databinding.FragmentHomeBinding
 import com.cs.foodapplandofcoding.model.MealsByCategory
 import com.cs.foodapplandofcoding.model.Meal
+import com.cs.foodapplandofcoding.screens.CategoryMealsActivity
 import com.cs.foodapplandofcoding.screens.MealActivity
 import com.cs.foodapplandofcoding.view_model.CategoriesAdapter
 import com.cs.foodapplandofcoding.view_model.HomeViewModel
@@ -36,12 +37,13 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "com.cs.foodapplandofcoding.fragments.idMeal"
         const val MEAL_NAME = "com.cs.foodapplandofcoding.fragments.nameMeal"
         const val MEAL_THUMB = "com.cs.foodapplandofcoding.fragments.thumbMeal"
+        const val CATEGORY_NAME = "com.cs.foodapplandofcoding.fragments.categoryName"
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         popularItemAdapter = MostPopularMealAdapter()
 
@@ -74,7 +76,16 @@ class HomeFragment : Fragment() {
         prepareCategoriesRecyclerView()
         viewModel.getCategories()
         observerCategoriesLiveData()
+        onCategoryClick()
 
+    }
+
+    private fun onCategoryClick() {
+        categoriesAdapter.onItemClick = { category ->
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
+        }
     }
 
     private fun prepareCategoriesRecyclerView() {

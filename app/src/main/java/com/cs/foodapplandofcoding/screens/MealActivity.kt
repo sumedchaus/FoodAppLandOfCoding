@@ -45,7 +45,8 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun observeMealDetailsLiveData() {
-        viewModel.observeMealDetailLiveData().observe(this, Observer { meal ->
+//        viewModel.observeMealDetailLiveData().observe(this, Observer { meal ->
+        viewModel.mealDetailLiveData.observe(this, Observer { meal ->
 
 //             use one of the method
 //            viewModel.isLoading.observe(this, Observer {
