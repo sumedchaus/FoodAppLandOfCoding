@@ -24,9 +24,9 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     var bottomSheetMealLiveData : LiveData<Meal> = _bottomSheetMealLiveData
 
 
-    init {
-        getRandomMeal()
-    }
+//    init {
+//        getRandomMeal()
+//    }
     fun getRandomMeal() {
 
         RetrofitInstance.api.getRandomMeal().enqueue(

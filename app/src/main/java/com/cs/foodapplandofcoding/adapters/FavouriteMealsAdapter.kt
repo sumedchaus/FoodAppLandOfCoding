@@ -6,12 +6,70 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.cs.foodapplandofcoding.databinding.CategoryItemBinding
 import com.cs.foodapplandofcoding.databinding.MealItemBinding
 import com.cs.foodapplandofcoding.model.Meal
 
+
+
+//class FavouriteMealsAdapter :
+//    RecyclerView.Adapter<FavouriteMealsAdapter.FavouriteMealsAdapterViewHolder>() {
+//    private var favoriteMeals: List<Meal> = ArrayList()
+//    private lateinit var onFavoriteClickListener: OnFavoriteClickListener
+//
+//    fun setFavoriteMealsList(favoriteMeals: List<Meal>) {
+//        this.favoriteMeals = favoriteMeals
+//        notifyDataSetChanged()
+//    }
+//
+//    fun getMelaByPosition(position: Int):Meal{
+//        return favoriteMeals[position]
+//    }
+//
+//
+//    fun setOnFavoriteMealClickListener(onFavoriteClickListener: OnFavoriteClickListener) {
+//        this.onFavoriteClickListener = onFavoriteClickListener
+//    }
+//
+//
+//    class FavouriteMealsAdapterViewHolder(val binding: MealItemBinding) :
+//        RecyclerView.ViewHolder(binding.root)
+//
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteMealsAdapterViewHolder {
+//        return FavouriteMealsAdapterViewHolder(MealItemBinding.inflate(LayoutInflater.from(parent.context)))
+//    }
+//
+//    override fun onBindViewHolder(holder: FavouriteMealsAdapterViewHolder, position: Int) {
+//        val i = position
+//        holder.binding.apply {
+//            tvMealName.text = favoriteMeals[position].strMeal
+//            Glide.with(holder.itemView)
+//                .load(favoriteMeals[position].strMealThumb)
+//                .into(holder.binding.imgMeal)
+//        }
+//
+//        holder.itemView.setOnClickListener {
+//            onFavoriteClickListener.onFavoriteClick(favoriteMeals[position])
+//        }
+//
+//    }
+//
+//    override fun getItemCount(): Int {
+//        return favoriteMeals.size
+//    }
+//
+//    interface OnFavoriteClickListener {
+//        fun onFavoriteClick(meal: Meal)
+//    }
+//
+//
+//}
+
+
+
 class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.FavouriteMealsAdapterViewHolder>() {
 
-    inner class FavouriteMealsAdapterViewHolder(val binding: MealItemBinding) :
+    inner class FavouriteMealsAdapterViewHolder(val binding: CategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -35,7 +93,7 @@ class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.Favouri
         viewType: Int
     ): FavouriteMealsAdapterViewHolder {
         return FavouriteMealsAdapterViewHolder(
-            MealItemBinding.inflate(
+            CategoryItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -45,9 +103,9 @@ class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.Favouri
        val meal =differ.currentList[position]
         Glide.with(holder.itemView)
             .load(meal.strMealThumb)
-            .into(holder.binding.imgMeal)
+            .into(holder.binding.imgCategory)
 
-            holder.binding.tvMealName.text = meal.strMeal
+            holder.binding.tvCategoryName.text = meal.strMeal
     }
 
     override fun getItemCount(): Int {
