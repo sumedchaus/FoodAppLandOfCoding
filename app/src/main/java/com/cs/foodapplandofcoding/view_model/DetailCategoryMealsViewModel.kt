@@ -11,8 +11,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryMealsViewModel() : ViewModel() {
-
+class DetailCategoryMealsViewModel() : ViewModel() {
+    //2nd page
     private val _mealsLiveData = MutableLiveData<List<MealsByCategory>>()
     val mealsLiveData: LiveData<List<MealsByCategory>> = _mealsLiveData
 

@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.databinding.MealItemBinding
-import com.cs.foodapplandofcoding.model.MealList
+import com.cs.foodapplandofcoding.model.Category
 import com.cs.foodapplandofcoding.model.MealsByCategory
-import com.cs.foodapplandofcoding.view_model.CategoriesAdapter
 
-class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewModel>() {
+class DetailCategoryMealsAdapter : RecyclerView.Adapter<DetailCategoryMealsAdapter.CategoryMealsViewModel>() {
 
     private var mealsList = ArrayList<MealsByCategory>()
+    var onItemClick : ((MealsByCategory) -> Unit)? = null
 
     fun setMealsList(mealList: List<MealsByCategory>){
         this.mealsList = mealList as ArrayList<MealsByCategory>
@@ -31,6 +31,12 @@ class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryM
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgMeal)
         holder.binding.tvMealName.text = mealsList[position].strMeal
+
+        holder.itemView.setOnClickListener {
+            onItemClick!!.invoke(mealsList[position])
+        }
+
+
     }
 
     override fun getItemCount(): Int {

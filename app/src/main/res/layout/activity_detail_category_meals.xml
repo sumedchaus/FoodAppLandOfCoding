@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.CategoryMealsActivity">
+    tools:context=".screens.DetailCategoryMealsActivity">
+
+
+    <TextView
+        android:id="@+id/tv_categoryMealsAppBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/myfont"
+        android:textColor="@color/accent"
+        android:text="CategoryMealsActivity"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_category_count"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_category_count"
@@ -14,8 +28,8 @@
         android:fontFamily="@font/myfont"
         android:textColor="@color/accent"
         android:textSize="@dimen/_15sdp"
+        app:layout_constraintStart_toEndOf="@id/tv_categoryMealsAppBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

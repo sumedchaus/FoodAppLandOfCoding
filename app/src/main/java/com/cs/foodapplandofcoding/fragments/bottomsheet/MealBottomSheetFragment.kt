@@ -2,18 +2,15 @@ package com.cs.foodapplandofcoding.fragments.bottomsheet
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.MainActivity
-import com.cs.foodapplandofcoding.R
-import com.cs.foodapplandofcoding.databinding.FragmentCategoriesBinding
 import com.cs.foodapplandofcoding.databinding.FragmentMealBottomSheetBinding
 import com.cs.foodapplandofcoding.fragments.HomeFragment
-import com.cs.foodapplandofcoding.screens.MealActivity
+import com.cs.foodapplandofcoding.screens.DetailMealActivity
 import com.cs.foodapplandofcoding.view_model.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -56,7 +53,7 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
 
             if(mealName != null && mealThumb != null){
 
-                val intent = Intent(activity,MealActivity::class.java)
+                val intent = Intent(activity,DetailMealActivity::class.java)
 
                 intent.apply {
                     putExtra(HomeFragment.MEAL_ID, mealId)

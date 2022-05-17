@@ -17,10 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".screens.CategoryMealsActivity"
+            android:name=".screens.DetailCategoryMealsActivity"
             android:exported="false" />
         <activity
-            android:name=".screens.MealActivity"
+            android:name=".screens.DetailMealActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

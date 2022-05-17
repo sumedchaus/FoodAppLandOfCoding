@@ -1,11 +1,10 @@
-package com.cs.foodapplandofcoding.view_model
+package com.cs.foodapplandofcoding.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.databinding.CategoryItemBinding
-import com.cs.foodapplandofcoding.databinding.PopularItemsBinding
 import com.cs.foodapplandofcoding.model.Category
 
 class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {

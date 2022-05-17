@@ -10,29 +10,29 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.R
-import com.cs.foodapplandofcoding.databinding.ActivityMealBinding
+import com.cs.foodapplandofcoding.databinding.ActivityDetailMealBinding
 import com.cs.foodapplandofcoding.db.MealDatabase
 import com.cs.foodapplandofcoding.fragments.HomeFragment
 import com.cs.foodapplandofcoding.model.Meal
-import com.cs.foodapplandofcoding.view_model.MealViewModel
+import com.cs.foodapplandofcoding.view_model.DetailMealViewModel
 import com.cs.foodapplandofcoding.viewmodel_factory.MealViewModelFactory
 
-class MealActivity : AppCompatActivity() {
+class DetailMealActivity : AppCompatActivity() {
     private lateinit var mealId: String
     private lateinit var mealName: String
     private lateinit var mealThumb: String
-    private lateinit var viewModel: MealViewModel
+    private lateinit var viewModel: DetailMealViewModel
     private lateinit var youtubeLink: String
 
-    private lateinit var binding: ActivityMealBinding
+    private lateinit var binding: ActivityDetailMealBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMealBinding.inflate(layoutInflater)
+        binding = ActivityDetailMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val mealDatabase = MealDatabase.getInstance(this)
         val viewModelFactory = MealViewModelFactory(mealDatabase)
-         viewModel = ViewModelProvider(this,viewModelFactory)[MealViewModel::class.java]
+         viewModel = ViewModelProvider(this,viewModelFactory)[DetailMealViewModel::class.java]
 
         loadingCase()
         getMealInformationFromIntent()

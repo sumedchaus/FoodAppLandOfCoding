@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
+class DetailMealViewModel(val mealDatabase: MealDatabase) : ViewModel() {
 
     // viewmodel provider is created for passing the constructor values of viewModel
 //    // The internal MutableLiveData that stores the status of the most recent request

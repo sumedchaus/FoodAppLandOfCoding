@@ -2,13 +2,11 @@ package com.cs.foodapplandofcoding.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -18,9 +16,9 @@ import com.cs.foodapplandofcoding.databinding.FragmentHomeBinding
 import com.cs.foodapplandofcoding.fragments.bottomsheet.MealBottomSheetFragment
 import com.cs.foodapplandofcoding.model.MealsByCategory
 import com.cs.foodapplandofcoding.model.Meal
-import com.cs.foodapplandofcoding.screens.CategoryMealsActivity
-import com.cs.foodapplandofcoding.screens.MealActivity
-import com.cs.foodapplandofcoding.view_model.CategoriesAdapter
+import com.cs.foodapplandofcoding.screens.DetailCategoryMealsActivity
+import com.cs.foodapplandofcoding.screens.DetailMealActivity
+import com.cs.foodapplandofcoding.adapters.CategoriesAdapter
 import com.cs.foodapplandofcoding.view_model.HomeViewModel
 
 
@@ -96,7 +94,7 @@ class HomeFragment : Fragment() {
 
     private fun onCategoryClick() {
         categoriesAdapter.onItemClick = { category ->
-            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            val intent = Intent(activity, DetailCategoryMealsActivity::class.java)
             intent.putExtra(CATEGORY_NAME, category.strCategory)
             startActivity(intent)
         }
@@ -118,7 +116,7 @@ class HomeFragment : Fragment() {
 
     private fun onPopularItemClick() {
         popularItemAdapter.onItemClick = { meal ->
-            val intent = Intent(activity, MealActivity::class.java)
+            val intent = Intent(activity, DetailMealActivity::class.java)
             intent.putExtra(MEAL_ID, meal.idMeal)
             intent.putExtra(MEAL_NAME, meal.strMeal)
             intent.putExtra(MEAL_THUMB, meal.strMealThumb)
@@ -143,7 +141,7 @@ class HomeFragment : Fragment() {
 
     private fun onRandomMealClick() {
         binding.randomMealCard.setOnClickListener {
-            val intent = Intent(activity, MealActivity::class.java)
+            val intent = Intent(activity, DetailMealActivity::class.java)
             intent.putExtra(MEAL_ID, randomMeal.idMeal)
             intent.putExtra(MEAL_NAME, randomMeal.strMeal)
             intent.putExtra(MEAL_THUMB, randomMeal.strMealThumb)
