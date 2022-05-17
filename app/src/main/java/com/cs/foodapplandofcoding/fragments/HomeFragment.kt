@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
 
         preparePopularItemsRecycleView()
 
-        viewModel.getRandomMeal()
+//        viewModel.getRandomMeal()
         observerRandomMeals()
         onRandomMealClick()
 

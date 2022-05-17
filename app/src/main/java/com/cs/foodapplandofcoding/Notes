@@ -28,3 +28,9 @@
 - But in notifyDataSetChanged() if some data changed the whole data is updated
 
 
+in main activity -> in fragment
+- add this line to back stack(it will redirect to home fragment and dont close the app)
+       app:defaultNavHost="true"
+
+
+
