@@ -12,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.cs.foodapplandofcoding.MainActivity
 import com.cs.foodapplandofcoding.adapters.MostPopularMealAdapter
 import com.cs.foodapplandofcoding.databinding.FragmentHomeBinding
+import com.cs.foodapplandofcoding.fragments.bottomsheet.MealBottomSheetFragment
 import com.cs.foodapplandofcoding.model.MealsByCategory
 import com.cs.foodapplandofcoding.model.Meal
 import com.cs.foodapplandofcoding.screens.CategoryMealsActivity
@@ -43,10 +45,13 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        // no need to create multiple instance of viewmodel just create one in the Activity of given fragments
+//        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        viewModel = (activity as MainActivity).viewModel
+
 
         popularItemAdapter = MostPopularMealAdapter()
-
     }
 
     override fun onCreateView(
@@ -78,6 +83,15 @@ class HomeFragment : Fragment() {
         observerCategoriesLiveData()
         onCategoryClick()
 
+        omPopularItemLongClick()
+
+    }
+
+    private fun omPopularItemLongClick() {
+        popularItemAdapter.onLongItemClick ={ meal ->
+            val mealBottomSheetFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager,"Meal Info")
+        }
     }
 
     private fun onCategoryClick() {

@@ -21,3 +21,10 @@
 - meal activity and activity meal is important learn carefully and understand everything
   collapsing tool bar , different types of layout intent.putExtra  sending data from one activity to another
 
+// learn diffUtils in favourite Adapter
+- diffUtils is used to increase the  performance of recycler view,
+- diffUtils is better than notifyDataSetChanged()
+- in diffUtil if some data changed then only changed data is updated
+- But in notifyDataSetChanged() if some data changed the whole data is updated
+
+

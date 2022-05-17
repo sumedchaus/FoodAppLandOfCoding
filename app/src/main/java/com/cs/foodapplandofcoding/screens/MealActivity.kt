@@ -4,14 +4,18 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.R
 import com.cs.foodapplandofcoding.databinding.ActivityMealBinding
+import com.cs.foodapplandofcoding.db.MealDatabase
 import com.cs.foodapplandofcoding.fragments.HomeFragment
+import com.cs.foodapplandofcoding.model.Meal
 import com.cs.foodapplandofcoding.view_model.MealViewModel
+import com.cs.foodapplandofcoding.viewmodel_factory.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
@@ -26,7 +30,9 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[MealViewModel::class.java]
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+         viewModel = ViewModelProvider(this,viewModelFactory)[MealViewModel::class.java]
 
         loadingCase()
         getMealInformationFromIntent()
@@ -35,6 +41,18 @@ class MealActivity : AppCompatActivity() {
         viewModel.getMealDetail(mealId)
         observeMealDetailsLiveData()
         onYoutubeImageClick()
+        onFavouriteClick()
+
+    }
+
+    private fun onFavouriteClick() {
+
+        binding.btnAddToFav.setOnClickListener {
+            mealToSave?.let {
+                viewModel.insertMeal(it)
+                Toast.makeText(this, "Meal Saved", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onYoutubeImageClick() {
@@ -44,6 +62,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    private var mealToSave : Meal? = null
     private fun observeMealDetailsLiveData() {
 //        viewModel.observeMealDetailLiveData().observe(this, Observer { meal ->
         viewModel.mealDetailLiveData.observe(this, Observer { meal ->
@@ -74,6 +93,7 @@ class MealActivity : AppCompatActivity() {
 
 
             onResponseCase()
+            mealToSave = meal
             binding.tvCategory.text = "Category: ${meal.strCategory} "
             binding.tvArea.text = "Area: ${meal.strArea} "
             binding.instructionDetails.text = "Area: ${meal.strInstructions} "

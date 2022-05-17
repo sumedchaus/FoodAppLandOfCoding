@@ -11,9 +11,9 @@ interface MealDao {
     suspend fun insertMeal(meal: Meal)
 
 
-    // or can use on conflixt mwthod
-    @Update
-    suspend fun updateMeal(meal:Meal)
+    // or can use on conflict method
+//    @Update
+//    suspend fun updateMeal(meal:Meal)
 
     @Delete
     suspend fun delete(meal: Meal)
