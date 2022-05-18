@@ -17,6 +17,7 @@ class DetailCategoryMealsViewModel() : ViewModel() {
     val mealsLiveData: LiveData<List<MealsByCategory>> = _mealsLiveData
 
 
+
     fun getMealsByCategory(categoryName: String) {
 
         RetrofitInstance.api.getMealsByCategory(categoryName)

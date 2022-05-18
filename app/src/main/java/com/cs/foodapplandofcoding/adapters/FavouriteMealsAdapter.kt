@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cs.foodapplandofcoding.databinding.CategoryItemBinding
+import com.cs.foodapplandofcoding.databinding.FavMealCardBinding
 import com.cs.foodapplandofcoding.databinding.MealItemBinding
 import com.cs.foodapplandofcoding.model.Meal
 
@@ -69,7 +70,7 @@ import com.cs.foodapplandofcoding.model.Meal
 
 class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.FavouriteMealsAdapterViewHolder>() {
 
-    inner class FavouriteMealsAdapterViewHolder(val binding: CategoryItemBinding) :
+    inner class FavouriteMealsAdapterViewHolder(val binding: FavMealCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -93,7 +94,7 @@ class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.Favouri
         viewType: Int
     ): FavouriteMealsAdapterViewHolder {
         return FavouriteMealsAdapterViewHolder(
-            CategoryItemBinding.inflate(
+            FavMealCardBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
@@ -103,9 +104,9 @@ class FavouriteMealsAdapter : RecyclerView.Adapter<FavouriteMealsAdapter.Favouri
        val meal =differ.currentList[position]
         Glide.with(holder.itemView)
             .load(meal.strMealThumb)
-            .into(holder.binding.imgCategory)
+            .into(holder.binding.imgFavMeal)
 
-            holder.binding.tvCategoryName.text = meal.strMeal
+            holder.binding.tvFavMealName.text = meal.strMeal
     }
 
     override fun getItemCount(): Int {

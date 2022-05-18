@@ -59,19 +59,17 @@ class FavouritesFragment : Fragment() {
             Snackbar.make(requireView(), "Meal Deleted", Snackbar.LENGTH_LONG).setAction(
                 "Undo"
             ) {
-                viewModel.insertMeal(favouriteAdapter.differ.currentList[position -1])
+                viewModel.insertMeal(favouriteAdapter.differ.currentList[position])
             }.show()
             }
-
-
         }
-        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvFavourites)
+        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.favRecView)
     }
 
     private fun prepareRecycleView() {
 
         favouriteAdapter = FavouriteMealsAdapter()
-        binding.rvFavourites.apply {
+        binding.favRecView.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = favouriteAdapter
 
@@ -85,6 +83,4 @@ class FavouritesFragment : Fragment() {
             favouriteAdapter.differ.submitList(meals)
         })
     }
-
-
 }

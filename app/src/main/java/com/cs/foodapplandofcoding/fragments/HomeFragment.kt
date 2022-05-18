@@ -2,6 +2,8 @@ package com.cs.foodapplandofcoding.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,10 +67,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val mainHandler = Handler(Looper.getMainLooper())
 
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                viewModel.getRandomMeal()
+                mainHandler.postDelayed(this, 5000)
+            }
+        })
         preparePopularItemsRecycleView()
 
-        viewModel.getRandomMeal()
+//        viewModel.getRandomMeal()
         observerRandomMeals()
         onRandomMealClick()
 

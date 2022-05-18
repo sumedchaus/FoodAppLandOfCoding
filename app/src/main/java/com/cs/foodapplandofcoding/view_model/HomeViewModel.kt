@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.logging.Handler
 
 class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
 
@@ -24,7 +25,9 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     var bottomSheetMealLiveData : LiveData<Meal> = _bottomSheetMealLiveData
 
 
-//    init {
+
+
+    //    init {
 //        getRandomMeal()
 //    }
     fun getRandomMeal() {
